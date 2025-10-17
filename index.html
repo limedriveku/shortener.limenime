@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shortener Limenime</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #e7ecff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ==== Background Layers ==== */
+  .bg-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px) brightness(0.85);
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: -2;
+  }
+  .bg-layer.active { opacity: 1; }
+
+  /* ==== Container ==== */
+  #container {
+    text-align: center;
+    background: rgba(40, 55, 80, 0.55);
+    border: 1px solid rgba(180, 210, 255, 0.3);
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(150, 190, 255, 0.4), 0 0 60px rgba(90, 150, 255, 0.25);
+    backdrop-filter: blur(12px);
+    animation: fadeIn 1.5s ease;
+    transition: all 0.5s ease;
+    z-index: 2;
+    position: relative;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8em;
+    color: #c9e3ff;
+    text-shadow: 0 0 12px rgba(160, 200, 255, 0.8);
+    margin-bottom: 20px;
+  }
+
+  #status {
+    font-size: 1.1em;
+    color: #a7caff;
+    text-shadow: 0 0 6px rgba(140, 200, 255, 0.7);
+    margin-bottom: 25px;
+    transition: opacity 0.5s ease;
+  }
+
+  button {
+    background: linear-gradient(135deg, #5c9eff, #a3bfff);
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 25px rgba(130, 180, 255, 0.5);
+  }
+
+  button:hover {
+    background: linear-gradient(135deg, #7db8ff, #c4d6ff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(180, 210, 255, 0.6);
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* ==== Kelopak Bunga Biru Turun Cinematic ==== */
+  .petal {
+    position: absolute;
+    top: -20px; /* start dari atas layar */
+    background: radial-gradient(circle at center, rgba(180,220,255,0.9) 30%, rgba(100,160,255,0) 70%);
+    clip-path: polygon(50% 0%, 65% 40%, 100% 50%, 65% 60%, 50% 100%, 35% 60%, 0% 50%, 35% 40%);
+    pointer-events: none;
+    z-index: 1;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+    25% { transform: translateY(25vh) rotate(90deg) translateX(15px); opacity: 0.8; }
+    50% { transform: translateY(50vh) rotate(180deg) translateX(-15px); opacity: 0.7; }
+    75% { transform: translateY(75vh) rotate(270deg) translateX(10px); opacity: 0.6; }
+    100% { transform: translateY(100vh) rotate(360deg) translateX(0); opacity: 0; }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+  <!-- Background Layers -->
+  <div id="bg1" class="bg-layer"></div>
+  <div id="bg2" class="bg-layer"></div>
+  <div id="bg3" class="bg-layer"></div>
+
+  <!-- Main Container -->
+  <div id="container">
+    <h1>Shortener Limenime</h1>
+    <div id="status">Mempersiapkan link...</div>
+    <button id="goButton" disabled>Loading...</button>
+  </div>
+
+<script>
+  // ==== Background rotasi ====
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const bgUrls = isMobile
+    ? [
+        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/mobile1.jpg",
+        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/mobile2.jpg"
+      ]
+    : [
+        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc1.jpg",
+        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc2.jpg",
+        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc3.jpg"
+      ];
+
+  const bgLayers = [document.getElementById("bg1"), document.getElementById("bg2"), document.getElementById("bg3")];
+  let index = 0;
+  bgLayers[0].style.backgroundImage = `url(${bgUrls[0]})`;
+  bgLayers[0].classList.add("active");
+
+  setInterval(() => {
+    const next = (index + 1) % bgUrls.length;
+    bgLayers[next].style.backgroundImage = `url(${bgUrls[next]})`;
+    bgLayers[next].classList.add("active");
+    bgLayers[index].classList.remove("active");
+    index = next;
+  }, 8000);
+
+  // ==== Efek Kelopak Cinematic dengan Depth + Blur + Parallax ====
+  const numPetals = 40;
+  const petals = [];
+  for (let i = 0; i < numPetals; i++) {
+    const p = document.createElement("div");
+    p.classList.add("petal");
+
+    // Depth effect
+    const depth = Math.random(); // 0 (jauh) - 1 (dekat)
+    const size = 6 + depth * 12;       // ukuran bervariasi
+    const opacity = 0.3 + depth * 0.7; // opacity bervariasi
+    const duration = 10 + (1 - depth) * 12; // durasi lebih lama untuk jauh
+    const blur = (1 - depth) * 4; // blur lebih besar untuk jauh
+    const parallax = 5 + depth * 10; // amplitudo horizontal parallax
+
+    p.style.left = `${Math.random() * 100}%`;
+    p.style.width = p.style.height = `${size}px`;
+    p.style.opacity = opacity;
+    p.style.animationDuration = `${duration}s`;
+    p.style.animationDelay = `${Math.random() * 10}s`;
+    p.style.filter = `blur(${blur}px)`;
+    p.dataset.parallax = parallax;
+    p.dataset.offset = Math.random() * 100; // untuk variasi awal horizontal
+    document.body.appendChild(p);
+    petals.push(p);
+  }
+
+  // Parallax animation
+  let t = 0;
+  function animateParallax() {
+    t += 0.01;
+    petals.forEach(p => {
+      const amplitude = p.dataset.parallax;
+      const offset = p.dataset.offset;
+      const x = Math.sin(t + offset) * amplitude;
+      p.style.transform = `translateX(${x}px) ${p.style.transform.replace(/translateX\([^)]+\)/,'')}`;
+    });
+    requestAnimationFrame(animateParallax);
+  }
+  animateParallax();
+
+  // ==== FUNGSI UTAMA (tidak diubah) ====
+  const params = new URLSearchParams(window.location.search);
+  const encoded = params.get("c");
+  const tCountdown = parseInt(params.get("t")) || 5;
+  const redirect = params.get("redirect") === "true";
+
+  const button = document.getElementById("goButton");
+  const status = document.getElementById("status");
+
+  if (!encoded) {
+    status.textContent = "Error: parameter 'c' tidak ditemukan!";
+    button.textContent = "Invalid";
+    button.disabled = true;
+  } else {
+    try {
+      const link = atob(encoded);
+      let countdown = tCountdown;
+      button.textContent = `Menunggu ${countdown}s`;
+
+      const interval = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+          button.textContent = `Menunggu ${countdown}s`;
+        } else {
+          clearInterval(interval);
+          status.style.opacity = 0;
+          setTimeout(() => {
+            status.textContent = "Link siap!";
+            status.style.opacity = 1;
+          }, 400);
+
+          button.textContent = "Go to Link";
+          button.disabled = false;
+
+          if (redirect) {
+            status.textContent = "Redirecting...";
+            setTimeout(() => {
+              window.location.href = link;
+            }, 1000);
+          } else {
+            button.addEventListener("click", () => {
+              window.location.href = link;
+            });
+          }
+        }
+      }, 1000);
+    } catch (err) {
+      status.textContent = "Error: Gagal decode base64!";
+      button.textContent = "Decode Failed";
+      button.disabled = true;
+    }
+  }
+</script>
+</body>
+</html>
