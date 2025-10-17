@@ -6,65 +6,63 @@
 <title>Shortener Limenime</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #e7ecff;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  color:#e7ecff;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
 }
 
-/* Background Layers */
-.bg-layer {
-  position: absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background-size: cover;
-  background-position: center;
-  filter: blur(5px) brightness(0.85);
+/* Background */
+.bg-layer{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background-size:cover;
+  background-position:center;
+  filter:blur(5px) brightness(0.85);
   opacity:0;
-  transition: opacity 2s ease-in-out;
-  z-index: -2;
+  transition:opacity 2s ease-in-out;
+  z-index:-2;
 }
-.bg-layer.active { opacity:1; }
+.bg-layer.active{opacity:1;}
 
 /* Container */
-#container {
-  text-align: center;
+#container{
+  text-align:center;
   background: rgba(40,55,80,0.55);
   border:1px solid rgba(180,210,255,0.3);
   padding: 40px 50px;
   border-radius: 20px;
   box-shadow:0 0 25px rgba(150,190,255,0.4),0 0 60px rgba(90,150,255,0.25);
   backdrop-filter: blur(12px);
-  animation: fadeIn 1.5s ease;
-  transition: all 0.5s ease;
+  animation:fadeIn 1.5s ease;
+  transition:all 0.5s ease;
   z-index:2;
-  position: relative;
+  position:relative;
 }
 
-h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.8em;
-  color: #c9e3ff;
+h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.8em;
+  color:#c9e3ff;
   text-shadow:0 0 12px rgba(160,200,255,0.8);
-  margin-bottom: 20px;
+  margin-bottom:20px;
 }
 
-#status {
+#status{
   font-size:1.1em;
   color:#a7caff;
   text-shadow:0 0 6px rgba(140,200,255,0.7);
-  margin-bottom: 25px;
-  transition: opacity 0.5s ease;
+  margin-bottom:25px;
+  transition:opacity 0.5s ease;
 }
 
-button {
-  background: linear-gradient(135deg, #5c9eff, #a3bfff);
+button{
+  background:linear-gradient(135deg,#5c9eff,#a3bfff);
   color:#fff;
   border:none;
   padding:14px 30px;
@@ -72,52 +70,36 @@ button {
   cursor:pointer;
   font-size:1.1em;
   font-weight:600;
-  transition: all 0.3s ease;
+  transition:all 0.3s ease;
   box-shadow:0 0 25px rgba(130,180,255,0.5);
 }
-button:hover {
-  background: linear-gradient(135deg,#7db8ff,#c4d6ff);
-  transform: translateY(-3px);
+button:hover{
+  background:linear-gradient(135deg,#7db8ff,#c4d6ff);
+  transform:translateY(-3px);
   box-shadow:0 0 30px rgba(180,210,255,0.6);
 }
-button:disabled { opacity:0.6; cursor:not-allowed; }
+button:disabled{opacity:0.6;cursor:not-allowed;}
 
 /* Kelopak Bunga */
-.petal {
-  position: absolute;
-  top: -20px;
-  background: radial-gradient(circle at center, rgba(180,220,255,0.9) 30%, rgba(100,160,255,0) 70%);
+.petal{
+  position:absolute;
+  top:-20px;
+  background:radial-gradient(circle at center, rgba(180,220,255,0.9) 30%, rgba(100,160,255,0) 70%);
   clip-path: polygon(50% 0%,65% 40%,100% 50%,65% 60%,50% 100%,35% 60%,0% 50%,35% 40%);
-  pointer-events: none;
+  pointer-events:none;
   z-index:1;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation-name:fall;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
 }
-@keyframes fall {
-  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity:0; }
-  25% { transform: translateY(25vh) rotate(90deg) translateX(15px); opacity:0.8; }
-  50% { transform: translateY(50vh) rotate(180deg) translateX(-15px); opacity:0.7; }
-  75% { transform: translateY(75vh) rotate(270deg) translateX(10px); opacity:0.6; }
-  100% { transform: translateY(100vh) rotate(360deg) translateX(0); opacity:0; }
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg) translateX(0);opacity:0;}
+  25%{transform:translateY(25vh) rotate(90deg) translateX(15px);opacity:0.8;}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(-15px);opacity:0.7;}
+  75%{transform:translateY(75vh) rotate(270deg) translateX(10px);opacity:0.6;}
+  100%{transform:translateY(100vh) rotate(360deg) translateX(0);opacity:0;}
 }
-
-@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-
-/* Audio player pojok kanan bawah */
-#audioContainer {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(40,55,80,0.7);
-  padding: 10px 15px;
-  border-radius: 12px;
-  box-shadow:0 0 15px rgba(130,180,255,0.5);
-  z-index:5;
-  color:#cce0ff;
-}
-#audioContainer button { margin-right:10px; }
-#audioContainer input[type=range]{ vertical-align: middle; }
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
@@ -134,128 +116,147 @@ button:disabled { opacity:0.6; cursor:not-allowed; }
   <button id="goButton" disabled>Loading...</button>
 </div>
 
-<!-- Audio Player -->
-<div id="audioContainer">
-  <audio id="audioPlayer" src="https://limedriveku.github.io/shortener.limenime/assets/audio.ogg"></audio>
-  <button id="playPause">Play</button>
-  <span id="timer">0:00 / 0:00</span>
-  <input id="volume" type="range" min="0" max="1" step="0.01" value="0.4">
+<!-- Minimalist Audio Player -->
+<div id="audioContainer" style="
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(40,55,80,0.6);
+    padding: 6px 8px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(130,180,255,0.4);
+    z-index: 5;
+    color: #cce0ff;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+">
+  <audio id="audioPlayer" src="https://files.catbox.moe/k2yftb.ogg"></audio>
+  <button id="playBtn" style="padding:3px 5px;">▶️</button>
+  <button id="pauseBtn" style="padding:3px 5px;">⏸️</button>
+  <button id="stopBtn" style="padding:3px 5px;">⏹️</button>
+  <input id="seek" type="range" min="0" max="100" value="0" style="width:70px;">
+  <input id="volume" type="range" min="0" max="1" step="0.01" value="0.4" style="width:40px;">
 </div>
 
 <script>
-  // Background rotasi
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const baseUrl = "https://limedriveku.github.io/shortener.limenime/assets/";
-  const bgUrls = isMobile ? [baseUrl+"mobile1.jpg", baseUrl+"mobile2.jpg"]
-                           : [baseUrl+"pc1.jpg", baseUrl+"pc2.jpg", baseUrl+"pc3.jpg"];
-  const bgLayers = [document.getElementById("bg1"),document.getElementById("bg2"),document.getElementById("bg3")];
-  let index=0;
-  bgLayers[0].style.backgroundImage=`url(${bgUrls[0]})`;
-  bgLayers[0].classList.add("active");
-  setInterval(()=>{
-    const next=(index+1)%bgUrls.length;
-    bgLayers[next].style.backgroundImage=`url(${bgUrls[next]})`;
-    bgLayers[next].classList.add("active");
-    bgLayers[index].classList.remove("active");
-    index=next;
-  },8000);
+/* Background rotation */
+const isMobile=/Mobi|Android/i.test(navigator.userAgent);
+const baseUrl="https://username.github.io/repo/assets/";
+const bgUrls = isMobile ? ["https://i.imgur.com/rFH08kz.jpeg", "https://i.imgur.com/PwmAxuV.jpeg"]
+                           : ["https://i.imgur.com/8uYzUKZ.jpeg", "https://i.imgur.com/8uYzUKZ.jpeg", "https://i.imgur.com/8uYzUKZ.jpeg"];
+const bgLayers=[document.getElementById("bg1"),document.getElementById("bg2"),document.getElementById("bg3")];
+let index=0;
+bgLayers[0].style.backgroundImage=`url(${bgUrls[0]})`;
+bgLayers[0].classList.add("active");
+setInterval(()=>{
+  const next=(index+1)%bgUrls.length;
+  bgLayers[next].style.backgroundImage=`url(${bgUrls[next]})`;
+  bgLayers[next].classList.add("active");
+  bgLayers[index].classList.remove("active");
+  index=next;
+},8000);
 
-  // Kelopak cinematic
-  const numPetals=40, petals=[];
-  for(let i=0;i<numPetals;i++){
-    const p=document.createElement("div");
-    p.classList.add("petal");
-    const depth=Math.random(), size=6+depth*12, opacity=0.3+depth*0.7,
-          duration=10+(1-depth)*12, blur=(1-depth)*4, parallax=5+depth*10;
-    p.style.left=`${Math.random()*100}%`;
-    p.style.width=p.style.height=`${size}px`;
-    p.style.opacity=opacity;
-    p.style.animationDuration=`${duration}s`;
-    p.style.animationDelay=`${Math.random()*10}s`;
-    p.style.filter=`blur(${blur}px)`;
-    p.dataset.parallax=parallax;
-    p.dataset.offset=Math.random()*100;
-    document.body.appendChild(p);
-    petals.push(p);
-  }
-  let t=0;
-  function animateParallax(){
-    t+=0.01;
-    petals.forEach(p=>{
-      const amplitude=p.dataset.parallax, offset=p.dataset.offset;
-      const x=Math.sin(t+offset)*amplitude;
-      p.style.transform=`translateX(${x}px) ${p.style.transform.replace(/translateX\([^)]+\)/,'')}`;
-    });
-    requestAnimationFrame(animateParallax);
-  }
-  animateParallax();
+/* Kelopak cinematic */
+const numPetals=40, petals=[];
+for(let i=0;i<numPetals;i++){
+  const p=document.createElement("div");
+  p.classList.add("petal");
+  const depth=Math.random(), size=6+depth*12, opacity=0.3+depth*0.7,
+        duration=10+(1-depth)*12, blur=(1-depth)*4, parallax=5+depth*10;
+  p.style.left=`${Math.random()*100}%`;
+  p.style.width=p.style.height=`${size}px`;
+  p.style.opacity=opacity;
+  p.style.animationDuration=`${duration}s`;
+  p.style.animationDelay=`${Math.random()*10}s`;
+  p.style.filter=`blur(${blur}px)`;
+  p.dataset.parallax=parallax;
+  p.dataset.offset=Math.random()*100;
+  document.body.appendChild(p);
+  petals.push(p);
+}
+let t=0;
+function animateParallax(){
+  t+=0.01;
+  petals.forEach(p=>{
+    const amplitude=p.dataset.parallax, offset=p.dataset.offset;
+    const x=Math.sin(t+offset)*amplitude;
+    p.style.transform=`translateX(${x}px) ${p.style.transform.replace(/translateX\([^)]+\)/,'')}`;
+  });
+  requestAnimationFrame(animateParallax);
+}
+animateParallax();
 
-  // Fungsi utama countdown + redirect
-  const params=new URLSearchParams(window.location.search);
-  const encoded=params.get("c");
-  const tCountdown=parseInt(params.get("t"))||5;
-  const redirect=params.get("redirect")==="true";
-  const button=document.getElementById("goButton");
-  const status=document.getElementById("status");
+/* Countdown + redirect */
+const params=new URLSearchParams(window.location.search);
+const encoded=params.get("c");
+const tCountdown=parseInt(params.get("t"))||5;
+const redirect=params.get("redirect")==="true";
+const button=document.getElementById("goButton");
+const status=document.getElementById("status");
 
-  if(!encoded){
-    status.textContent="Error: parameter 'c' tidak ditemukan!";
-    button.textContent="Invalid";
-    button.disabled=true;
-  } else {
-    try{
-      const link=atob(encoded);
-      let countdown=tCountdown;
-      button.textContent=`Menunggu ${countdown}s`;
-      const interval=setInterval(()=>{
-        countdown--;
-        if(countdown>0){
-          button.textContent=`Menunggu ${countdown}s`;
-        } else {
-          clearInterval(interval);
-          status.style.opacity=0;
-          setTimeout(()=>{status.textContent="Link siap!";status.style.opacity=1;},400);
-          button.textContent="Go to Link";
-          button.disabled=false;
-          if(redirect){
-            status.textContent="Redirecting...";
-            setTimeout(()=>{window.location.href=link;},1000);
-          } else {
-            button.addEventListener("click",()=>{window.location.href=link;});
-          }
+if(!encoded){
+  status.textContent="Error: parameter 'c' tidak ditemukan!";
+  button.textContent="Invalid";
+  button.disabled=true;
+}else{
+  try{
+    const link=atob(encoded);
+    let countdown=tCountdown;
+    button.textContent=`Menunggu ${countdown}s`;
+    const interval=setInterval(()=>{
+      countdown--;
+      if(countdown>0){button.textContent=`Menunggu ${countdown}s`;}
+      else{
+        clearInterval(interval);
+        status.style.opacity=0;
+        setTimeout(()=>{status.textContent="Link siap!"; status.style.opacity=1;},400);
+        button.textContent="Go to Link";
+        button.disabled=false;
+        if(redirect){
+          status.textContent="Redirecting...";
+          setTimeout(()=>{window.location.href=link;},1000);
+        }else{
+          button.addEventListener("click",()=>{window.location.href=link;});
         }
-      },1000);
-    } catch(err){
-      status.textContent="Error: Gagal decode base64!";
-      button.textContent="Decode Failed";
-      button.disabled=true;
-    }
+      }
+    },1000);
+  }catch(err){
+    status.textContent="Error: Gagal decode base64!";
+    button.textContent="Decode Failed";
+    button.disabled=true;
   }
+}
 
-  // Audio player
-  const audio=document.getElementById("audioPlayer");
-  const playBtn=document.getElementById("playPause");
-  const timerEl=document.getElementById("timer");
-  const volume=document.getElementById("volume");
+/* Minimalist Audio Player */
+const audio=document.getElementById("audioPlayer");
+const playBtn=document.getElementById("playBtn");
+const pauseBtn=document.getElementById("pauseBtn");
+const stopBtn=document.getElementById("stopBtn");
+const seek=document.getElementById("seek");
+const volume=document.getElementById("volume");
 
-  audio.volume=0.4; // default 40%
-  audio.currentTime=0; // start dari awal
+audio.volume=0.4;
+audio.currentTime=0;
 
-  playBtn.addEventListener("click",()=>{
-    if(audio.paused){audio.play(); playBtn.textContent="Pause";}
-    else{audio.pause(); playBtn.textContent="Play";}
-  });
+playBtn.addEventListener("click",()=>audio.play());
+pauseBtn.addEventListener("click",()=>audio.pause());
+stopBtn.addEventListener("click",()=>{
+  audio.pause();
+  audio.currentTime=0;
+});
 
-  volume.addEventListener("input",()=>{audio.volume=volume.value;});
+audio.addEventListener("timeupdate",()=>{
+  if(audio.duration) seek.value=(audio.currentTime/audio.duration)*100;
+});
 
-  audio.addEventListener("timeupdate",()=>{
-    const curM=Math.floor(audio.currentTime/60);
-    const curS=Math.floor(audio.currentTime%60).toString().padStart(2,'0');
-    const durM=Math.floor(audio.duration/60)||0;
-    const durS=Math.floor(audio.duration%60).toString().padStart(2,'0');
-    timerEl.textContent=`${curM}:${curS} / ${durM}:${durS}`;
-  });
+seek.addEventListener("input",()=>{
+  if(audio.duration) audio.currentTime=(seek.value/100)*audio.duration;
+});
+
+volume.addEventListener("input",()=>{audio.volume=volume.value;});
 </script>
+
 </body>
 </html>
-
