@@ -127,15 +127,16 @@
 <script>
   // ==== Background rotasi ====
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const baseUrl = "https://username.github.io/repo/assets/";
   const bgUrls = isMobile
     ? [
-        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/mobile1.jpg",
-        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/mobile2.jpg"
+        baseUrl + "mobile1.jpg",
+        baseUrl + "mobile2.jpg"
       ]
     : [
-        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc1.jpg",
-        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc2.jpg",
-        "https://raw.githubusercontent.com/limedriveku/limesub/refs/heads/main/assets/pc3.jpg"
+        baseUrl + "pc1.jpg",
+        baseUrl + "pc2.jpg",
+        baseUrl + "pc3.jpg"
       ];
 
   const bgLayers = [document.getElementById("bg1"), document.getElementById("bg2"), document.getElementById("bg3")];
