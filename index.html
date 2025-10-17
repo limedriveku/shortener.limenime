@@ -144,8 +144,8 @@ button:disabled{opacity:0.6;cursor:not-allowed;}
 /* Background rotation */
 const isMobile=/Mobi|Android/i.test(navigator.userAgent);
 const baseUrl="https://username.github.io/repo/assets/";
-const bgUrls = isMobile ? ["https://i.imgur.com/rFH08kz.jpeg", "https://i.imgur.com/PwmAxuV.jpeg"]
-                           : ["https://i.imgur.com/8uYzUKZ.jpeg", "https://i.imgur.com/8uYzUKZ.jpeg", "https://i.imgur.com/8uYzUKZ.jpeg"];
+const bgUrls = isMobile ? ["https://files.catbox.moe/b3xfxe.jpg", "https://files.catbox.moe/1erzhv.jpg"]
+                           : ["https://files.catbox.moe/2f06rg.jpg", "https://files.catbox.moe/w2gild.jpg", "https://files.catbox.moe/720hy7.jpg"];
 const bgLayers=[document.getElementById("bg1"),document.getElementById("bg2"),document.getElementById("bg3")];
 let index=0;
 bgLayers[0].style.backgroundImage=`url(${bgUrls[0]})`;
@@ -260,3 +260,4 @@ volume.addEventListener("input",()=>{audio.volume=volume.value;});
 
 </body>
 </html>
+
